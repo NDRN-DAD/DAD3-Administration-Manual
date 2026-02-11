@@ -1,0 +1,592 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Permissions Reference - DAD 3.0 Administration Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+        <link rel="stylesheet" href=".././mdbook-admonish.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">DAD 3.0 Administration Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><a href="../index.html">Home</a> / <a href="index.html">Appendix</a> / Appendix A: Permissions Reference</p>
+<h1 id="appendix-a-permissions-reference"><a class="header" href="#appendix-a-permissions-reference">Appendix A: Permissions Reference</a></h1>
+<p>In <strong>Security Groups administration</strong>, all permissions are listed <strong>alphabetically</strong>. You can type into the <strong>search filter</strong> to narrow the list to permissions of a certain type (for example, <code>appointment</code>, <code>attachment</code>, or <code>time</code>).</p>
+<p>The tables below group permissions by record type or function and explain what granting each permission allows a user to do.</p>
+<div id="admonition-important" class="admonition admonish-tip" role="note" aria-labelledby="admonition-important-title">
+<div class="admonition-title">
+<div id="admonition-important-title">
+<p>Important</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-important"></a>
+</div>
+<div>
+<p><strong>Permissions are additive.</strong> Users receive every permission included in each role they are assigned. Roles only grant privileges; they do not override or take away permissions granted by other roles.</p>
+</div>
+</div>
+## Permissions Categories
+<ul>
+<li><a href="#all-users">All Users</a></li>
+<li><a href="#appointments">Appointments</a></li>
+<li><a href="#attachments">Attachments</a></li>
+<li><a href="#time">Time</a></li>
+<li><a href="#admin-timekeeper">Admin Timekeeper</a></li>
+<li><a href="#clientsservice-requests">Clients / Service Requests</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#fund-splits">Fund Splits</a></li>
+<li><a href="#administration">Administration</a></li>
+<li><a href="#report-generator">Report Generator</a></li>
+</ul>
+<h2 id="all-users"><a class="header" href="#all-users">All Users</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Permission</th><th>What granting this permission does</th></tr></thead><tbody>
+<tr><td>Access Control: Desktop Start Page</td><td>Allows access to <strong>Desktop Start Page</strong>.</td></tr>
+</tbody></table>
+</div>
+<h2 id="appointments"><a class="header" href="#appointments">Appointments</a></h2>
+<p><em>(search term: appointment)</em></p>
+<div class="table-wrapper"><table><thead><tr><th>Permission</th><th>What granting this permission does</th></tr></thead><tbody>
+<tr><td>Add Appointments: Client (Any)</td><td>Can create client appointments on any user's calendar.</td></tr>
+<tr><td>Add Appointments: Client (Own)</td><td>Can create client appointments on their own calendar.</td></tr>
+<tr><td>Add Appointments: General (Any)</td><td>Can create general appointments on any user's calendar.</td></tr>
+<tr><td>Add Appointments: General (Own)</td><td>Can create general appointments on their own calendar.</td></tr>
+<tr><td>Add Appointments: Project (Any)</td><td>Can create project appointments on any user's calendar.</td></tr>
+<tr><td>Add Appointments: Project (Own)</td><td>Can create project appointments on their own calendar.</td></tr>
+<tr><td>Add Appointments: Service Request (Any)</td><td>Can create service request appointments on any user's calendar.</td></tr>
+<tr><td>Add Appointments: Service Request (Own)</td><td>Can create service request appointments on their own calendar.</td></tr>
+<tr><td>Delete Appointments: Client (Any)</td><td>Can delete client appointments on any user's calendar.</td></tr>
+<tr><td>Delete Appointments: Client (Own)</td><td>Can delete client appointments on their own calendar.</td></tr>
+<tr><td>Delete Appointments: General (Any)</td><td>Can delete general appointments on any user's calendar.</td></tr>
+<tr><td>Delete Appointments: General (Own)</td><td>Can delete general appointments on their own calendar.</td></tr>
+<tr><td>Delete Appointments: Project (Any)</td><td>Can delete project appointments on any user's calendar.</td></tr>
+<tr><td>Delete Appointments: Project (Own)</td><td>Can delete project appointments on their own calendar.</td></tr>
+<tr><td>Delete Appointments: Service Request (Any)</td><td>Can delete service request appointments on any user's calendar.</td></tr>
+<tr><td>Delete Appointments: Service Request (Own)</td><td>Can delete service request appointments on their own calendar.</td></tr>
+<tr><td>Edit Appointments: Client (Any)</td><td>Can edit client appointments on any user's calendar.</td></tr>
+<tr><td>Edit Appointments: Client (Own)</td><td>Can edit client appointments on their own calendar.</td></tr>
+<tr><td>Edit Appointments: General (Any)</td><td>Can edit general appointments on any user's calendar.</td></tr>
+<tr><td>Edit Appointments: General (Own)</td><td>Can edit general appointments on their own calendar.</td></tr>
+<tr><td>Edit Appointments: Project (Any)</td><td>Can edit project appointments on any user's calendar.</td></tr>
+<tr><td>Edit Appointments: Project (Own)</td><td>Can edit project appointments on their own calendar.</td></tr>
+<tr><td>Edit Appointments: Service Request (Any)</td><td>Can edit service request appointments on any user's calendar.</td></tr>
+<tr><td>Edit Appointments: Service Request (Own)</td><td>Can edit service request appointments on their own calendar.</td></tr>
+<tr><td>View Appointments: Client (Any)</td><td>Can view client appointments on any user's calendar.</td></tr>
+<tr><td>View Appointments: Client (Own)</td><td>Can view client appointments on their own calendar.</td></tr>
+<tr><td>View Appointments: General (Any)</td><td>Can view general appointments on any user's calendar.</td></tr>
+<tr><td>View Appointments: General (Own)</td><td>Can view general appointments on their own calendar.</td></tr>
+<tr><td>View Appointments: Project (Any)</td><td>Can view project appointments on any user's calendar.</td></tr>
+<tr><td>View Appointments: Project (Own)</td><td>Can view project appointments on their own calendar.</td></tr>
+<tr><td>View Appointments: Service Request (Any)</td><td>Can view service request appointments on any user's calendar.</td></tr>
+<tr><td>View Appointments: Service Request (Own)</td><td>Can view service request appointments on their own calendar.</td></tr>
+</tbody></table>
+</div>
+<h2 id="attachments"><a class="header" href="#attachments">Attachments</a></h2>
+<p><em>(search term: attachment)</em></p>
+<div class="table-wrapper"><table><thead><tr><th>Permission</th><th>What granting this permission does</th></tr></thead><tbody>
+<tr><td>Add Attachments: Client</td><td>Can upload and attach files to client records.</td></tr>
+<tr><td>Add Attachments: Client Note</td><td>Can upload and attach files to client note records.</td></tr>
+<tr><td>Add Attachments: Leave Time</td><td>Can upload and attach files to leave time records.</td></tr>
+<tr><td>Add Attachments: Project</td><td>Can upload and attach files to project records.</td></tr>
+<tr><td>Add Attachments: Project Note</td><td>Can upload and attach files to project note records.</td></tr>
+<tr><td>Add Attachments: Project Time</td><td>Can upload and attach files to project time records.</td></tr>
+<tr><td>Add Attachments: Service Request</td><td>Can upload and attach files to service request records.</td></tr>
+<tr><td>Add Attachments: Service Request Note</td><td>Can upload and attach files to service request note records.</td></tr>
+<tr><td>Add Attachments: Service Request Time</td><td>Can upload and attach files to service request time records.</td></tr>
+<tr><td>Delete Attachments: Client (Any)</td><td>Can delete any attachments to client records.</td></tr>
+<tr><td>Delete Attachments: Client (Own)</td><td>Can delete their own attachments to client records.</td></tr>
+<tr><td>Delete Attachments: Client Note (Any)</td><td>Can delete any attachments to client note records.</td></tr>
+<tr><td>Delete Attachments: Client Note (Own)</td><td>Can delete their own attachments on client note records.</td></tr>
+<tr><td>Delete Attachments: Leave Time (Any)</td><td>Can delete any attachments to leave time records.</td></tr>
+<tr><td>Delete Attachments: Leave Time (Own)</td><td>Can delete their own attachments on leave time records.</td></tr>
+<tr><td>Delete Attachments: Project (Any)</td><td>Can delete any attachments to project records.</td></tr>
+<tr><td>Delete Attachments: Project (Own)</td><td>Can delete their own attachments on project records.</td></tr>
+<tr><td>Delete Attachments: Project Note (Any)</td><td>Can delete any attachments to project note records.</td></tr>
+<tr><td>Delete Attachments: Project Note (Own)</td><td>Can delete their own attachments on project note records.</td></tr>
+<tr><td>Delete Attachments: Project Time (Any)</td><td>Can delete any attachments to project time records.</td></tr>
+<tr><td>Delete Attachments: Project Time (Own)</td><td>Can delete their own attachments on project time records.</td></tr>
+<tr><td>Delete Attachments: Service Request (Any)</td><td>Can delete any attachments to service request records.</td></tr>
+<tr><td>Delete Attachments: Service Request (Own)</td><td>Can delete their own attachments on service request records.</td></tr>
+<tr><td>Delete Attachments: Service Request Note (Any)</td><td>Can delete any attachments to service request note records.</td></tr>
+<tr><td>Delete Attachments: Service Request Note (Own)</td><td>Can delete their own attachments on service request note records.</td></tr>
+<tr><td>Delete Attachments: Service Request Time (Any)</td><td>Can delete any attachments to service request time records.</td></tr>
+<tr><td>Delete Attachments: Service Request Time (Own)</td><td>Can delete their own attachments on service request time records.</td></tr>
+<tr><td>Edit Attachments: Client (Any)</td><td>Can edit any attachments on client records.</td></tr>
+<tr><td>Edit Attachments: Client (Own)</td><td>Can edit their own attachments on client records.</td></tr>
+<tr><td>Edit Attachments: Client Note (Any)</td><td>Can edit any attachments on client note records.</td></tr>
+<tr><td>Edit Attachments: Client Note (Own)</td><td>Can edit their own attachments on client note records.</td></tr>
+<tr><td>Edit Attachments: Leave Time (Any)</td><td>Can edit any attachments on leave time records.</td></tr>
+<tr><td>Edit Attachments: Leave Time (Own)</td><td>Can edit their own attachments on leave time records.</td></tr>
+<tr><td>Edit Attachments: Project (Any)</td><td>Can edit any attachments on project records.</td></tr>
+<tr><td>Edit Attachments: Project (Own)</td><td>Can edit their own attachments on project records.</td></tr>
+<tr><td>Edit Attachments: Project Note (Any)</td><td>Can edit any attachments on project note records.</td></tr>
+<tr><td>Edit Attachments: Project Note (Own)</td><td>Can edit their own attachments on project note records.</td></tr>
+<tr><td>Edit Attachments: Project Time (Any)</td><td>Can edit any attachments on project time records.</td></tr>
+<tr><td>Edit Attachments: Project Time (Own)</td><td>Can edit their own attachments on project time records.</td></tr>
+<tr><td>Edit Attachments: Service Request (Any)</td><td>Can edit any attachments on service request records.</td></tr>
+<tr><td>Edit Attachments: Service Request (Own)</td><td>Can edit their own attachments on service request records.</td></tr>
+<tr><td>Edit Attachments: Service Request Note (Any)</td><td>Can edit any attachments on service request note records.</td></tr>
+<tr><td>Edit Attachments: Service Request Note (Own)</td><td>Can edit their own attachments on service request note records.</td></tr>
+<tr><td>Edit Attachments: Service Request Time (Any)</td><td>Can edit any attachments on service request time records.</td></tr>
+<tr><td>Edit Attachments: Service Request Time (Own)</td><td>Can edit their own attachments on service request time records.</td></tr>
+<tr><td>Replace Attachment Files: Client (Any)</td><td>Can replace the underlying file for any attachments on client records.</td></tr>
+<tr><td>Replace Attachment Files: Client (Own)</td><td>Can replace the underlying file for their own attachments on client records.</td></tr>
+<tr><td>Replace Attachment Files: Client Note (Any)</td><td>Can replace the underlying file for any attachments on client note records.</td></tr>
+<tr><td>Replace Attachment Files: Client Note (Own)</td><td>Can replace the underlying file for their own attachments on client note records.</td></tr>
+<tr><td>Replace Attachment Files: Leave Time (Any)</td><td>Can replace the underlying file for any attachments on leave time records.</td></tr>
+<tr><td>Replace Attachment Files: Leave Time (Own)</td><td>Can replace the underlying file for their own attachments on leave time records.</td></tr>
+<tr><td>Replace Attachment Files: Project (Any)</td><td>Can replace the underlying file for any attachments on project records.</td></tr>
+<tr><td>Replace Attachment Files: Project (Own)</td><td>Can replace the underlying file for their own attachments on project records.</td></tr>
+<tr><td>Replace Attachment Files: Project Note (Any)</td><td>Can replace the underlying file for any attachments on project note records.</td></tr>
+<tr><td>Replace Attachment Files: Project Note (Own)</td><td>Can replace the underlying file for their own attachments on project note records.</td></tr>
+<tr><td>Replace Attachment Files: Project Time (Any)</td><td>Can replace the underlying file for any attachments on project time records.</td></tr>
+<tr><td>Replace Attachment Files: Project Time (Own)</td><td>Can replace the underlying file for their own attachments on project time records.</td></tr>
+<tr><td>Replace Attachment Files: Service Request (Any)</td><td>Can replace the underlying file for any attachments on service request records.</td></tr>
+<tr><td>Replace Attachment Files: Service Request (Own)</td><td>Can replace the underlying file for their own attachments on service request records.</td></tr>
+<tr><td>Replace Attachment Files: Service Request Note (Any)</td><td>Can replace the underlying file for any attachments on service request note records.</td></tr>
+<tr><td>Replace Attachment Files: Service Request Note (Own)</td><td>Can replace the underlying file for their own attachments on service request note records.</td></tr>
+<tr><td>Replace Attachment Files: Service Request Time (Any)</td><td>Can replace the underlying file for any attachments on service request time records.</td></tr>
+<tr><td>Replace Attachment Files: Service Request Time (Own)</td><td>Can replace the underlying file for their own attachments on service request time records.</td></tr>
+<tr><td>View Attachments: Client (Any)</td><td>Can view any attachments on client records.</td></tr>
+<tr><td>View Attachments: Client (Own)</td><td>Can view their own attachments on client records.</td></tr>
+<tr><td>View Attachments: Client Note (Any)</td><td>Can view any attachments on client note records.</td></tr>
+<tr><td>View Attachments: Client Note (Own)</td><td>Can view their own attachments on client note records.</td></tr>
+<tr><td>View Attachments: Leave Time (Any)</td><td>Can view any attachments on leave time records.</td></tr>
+<tr><td>View Attachments: Leave Time (Own)</td><td>Can view their own attachments on leave time records.</td></tr>
+<tr><td>View Attachments: Project (Any)</td><td>Can view any attachments on project records.</td></tr>
+<tr><td>View Attachments: Project (Own)</td><td>Can view their own attachments on project records.</td></tr>
+<tr><td>View Attachments: Project Note (Any)</td><td>Can view any attachments on project note records.</td></tr>
+<tr><td>View Attachments: Project Note (Own)</td><td>Can view their own attachments on project note records.</td></tr>
+<tr><td>View Attachments: Project Time (Any)</td><td>Can view any attachments on project time records.</td></tr>
+<tr><td>View Attachments: Project Time (Own)</td><td>Can view their own attachments on project time records.</td></tr>
+<tr><td>View Attachments: Service Request (Any)</td><td>Can view any attachments on service request records.</td></tr>
+<tr><td>View Attachments: Service Request (Own)</td><td>Can view their own attachments on service request records.</td></tr>
+<tr><td>View Attachments: Service Request Note (Any)</td><td>Can view any attachments on service request note records.</td></tr>
+<tr><td>View Attachments: Service Request Note (Own)</td><td>Can view their own attachments on service request note records.</td></tr>
+<tr><td>View Attachments: Service Request Time (Any)</td><td>Can view any attachments on service request time records.</td></tr>
+<tr><td>View Attachments: Service Request Time (Own)</td><td>Can view their own attachments on service request time records.</td></tr>
+</tbody></table>
+</div>
+<h2 id="time"><a class="header" href="#time">Time</a></h2>
+<p><em>(search term: labor, time, clock)</em></p>
+<div class="table-wrapper"><table><thead><tr><th>Permission</th><th>What granting this permission does</th></tr></thead><tbody>
+<tr><td>Approve Timesheets</td><td>Can approve submitted timesheets.</td></tr>
+<tr><td>Clock In/Out (Any Non-Exempt)</td><td>Can clock in/out on behalf of any non-exempt employee.</td></tr>
+<tr><td>Clock In/Out (Own)</td><td>Can clock themselves in and out.</td></tr>
+<tr><td>Delete Time: Leave Time (Any)</td><td>Can delete leave time entries for any user.</td></tr>
+<tr><td>Delete Time: Leave Time (Own)</td><td>Can delete leave time entries for themselves.</td></tr>
+<tr><td>Delete Time: Project Time (Any)</td><td>Can delete project time entries for any user.</td></tr>
+<tr><td>Delete Time: Project Time (Own)</td><td>Can delete project time entries for themselves.</td></tr>
+<tr><td>Delete Time: Service Request Time (Any)</td><td>Can delete service request time entries for any user.</td></tr>
+<tr><td>Delete Time: Service Request Time (Own)</td><td>Can delete service request time entries for themselves.</td></tr>
+<tr><td>Edit: Clock In/Out Time</td><td>Can edit clock in/out timestamp.</td></tr>
+<tr><td>Edit Time Lock Date (Any)</td><td>Can change the time lock date that controls when time entries can no longer be edited.</td></tr>
+<tr><td>Edit Time: Leave Time (Any)</td><td>Can edit leave time entries for any user.</td></tr>
+<tr><td>Edit Time: Leave Time (Own)</td><td>Can edit leave time entries for themselves.</td></tr>
+<tr><td>Edit Time: Project Time (Any)</td><td>Can edit project time entries for any user.</td></tr>
+<tr><td>Edit Time: Project Time (Own)</td><td>Can edit project time entries for themselves.</td></tr>
+<tr><td>Edit Time: Service Request Time (Any)</td><td>Can edit service request time entries for any user.</td></tr>
+<tr><td>Edit Time: Service Request Time (Own)</td><td>Can edit service request time entries for themselves.</td></tr>
+<tr><td>Record Time: Leave Time (Any)</td><td>Can record leave time entries for any user.</td></tr>
+<tr><td>Record Time: Leave Time (Own)</td><td>Can record leave time entries for themselves.</td></tr>
+<tr><td>Record Time: Override Time Lockout Period</td><td>Can enter time outside the configured lockout window.</td></tr>
+<tr><td>Record Time: Project Time (Any)</td><td>Can record project time entries for any user.</td></tr>
+<tr><td>Record Time: Project Time (Own)</td><td>Can record project time entries for themselves.</td></tr>
+<tr><td>Record Time: Service Request Time (Any)</td><td>Can record service request time entries for any user.</td></tr>
+<tr><td>Record Time: Service Request Time (Own)</td><td>Can record service request time entries for themselves.</td></tr>
+<tr><td>View Time: Leave Time (Any)</td><td>Can view leave time entries for any user.</td></tr>
+<tr><td>View Time: Leave Time (Team Leader Access)</td><td>Can view leave time entries for users they supervise (as a team leader).</td></tr>
+<tr><td>View Time: Project Time (Any)</td><td>Can view project time entries for any user.</td></tr>
+<tr><td>View Time: Project Time (Team Leader Access)</td><td>Can view project time entries for users they supervise (as a team leader).</td></tr>
+<tr><td>View Time: Service Request Time (Any)</td><td>Can view service request time entries for any user.</td></tr>
+<tr><td>View Time: Service Request Time (Team Leader Access)</td><td>Can view service request time entries for users they supervise (as a team leader).</td></tr>
+<tr><td>View Timesheet (All Submitted)</td><td>Can view all submitted timesheets.</td></tr>
+<tr><td>View Timesheet (Any)</td><td>Can view any user's timesheet.</td></tr>
+<tr><td>View Timesheet (Own)</td><td>Can view their own timesheet.</td></tr>
+<tr><td>View Timesheet (Team Leader Access)</td><td>Can view timesheets for users they supervise (as a team leader).</td></tr>
+</tbody></table>
+</div>
+<h2 id="admin-timekeeper"><a class="header" href="#admin-timekeeper">Admin Timekeeper</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Permission</th><th>What granting this permission does</th></tr></thead><tbody>
+<tr><td>Process Timesheets</td><td>Can complete timesheet processing on timesheets that have been approved.</td></tr>
+<tr><td>Access Control: Labor Distribution Report</td><td>Allows access to <strong>Labor Distribution Report</strong>.</td></tr>
+</tbody></table>
+</div>
+<h2 id="clientsservice-requests"><a class="header" href="#clientsservice-requests">Clients/Service Requests</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Permission</th><th>What granting this permission does</th></tr></thead><tbody>
+<tr><td>Close Service Requests: Case Service (Individual Advocacy Service/Self Advocacy) - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned service requests with this mapped Service Request Type that do not require supervisor review (i.e. has SR Type for which <em>Closure of Service Requests With This Type Requires Supervisor Review</em> is unchecked in Service Request Type Administration.)</td></tr>
+<tr><td>Close Service Requests: Case Service (Individual Advocacy Service/Self Advocacy) - Assigned / Requiring Supervisor Review</td><td>Can close assigned service requests with this mapped Service Request Type that requires supervisor review (i.e. has SR Type for which <em>Closure of Service Requests With This Type Requires Supervisor Review</em> is checked.)</td></tr>
+<tr><td>Close Service Requests: Case Service (Individual Advocacy Service/Self Advocacy) - Unassigned / Not Requiring Supervisor Review</td><td>Can close any service request with mapped Service Request Type of Case Service (Individual Advocacy Service/Self Advocacy) that does not require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Case Service (Individual Advocacy Service/Self Advocacy) - Unassigned / Requiring Supervisor Review</td><td>Can close any service request with mapped Service Request Type of Case Service (Individual Advocacy Service/Self Advocacy) that requires supervisor review.</td></tr>
+<tr><td>Close Service Requests: Case Service (Individual Investigation) - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned service requests with mapped Service Request Type of Case Service (Individual Investigation) if it does not require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Case Service (Individual Investigation) - Assigned / Requiring Supervisor Review</td><td>Can close assigned service requests with mapped Service Request Type of Case Service (Individual Investigation) that require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Case Service (Individual Investigation) - Unassigned / Not Requiring Supervisor Review</td><td>Can close any service request with mapped Service Request Type of Case Service (Individual Investigation) if it does not require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Case Service (Individual Investigation) - Unassigned / Requiring Supervisor Review</td><td>Can close any service request with mapped Service Request Type of Case Service (Individual Investigation) that requires supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (I&amp;R) - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned service requests with mapped Service Request Type of Non-Case Service (I&amp;R) if it does not require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (I&amp;R) - Assigned / Requiring Supervisor Review</td><td>Can close assigned service requests with mapped Service Request Type of Non-Case Service (I&amp;R) that require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (I&amp;R) - Unassigned / Not Requiring Supervisor Review</td><td>Can close any service request with mapped Service Request Type of Non-Case Service (I&amp;R) if it does not require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (I&amp;R) - Unassigned / Requiring Supervisor Review</td><td>Can close any service request with mapped Service Request Type of Non-Case Service (I&amp;R) that requires supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (Not I&amp;R/TA) - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned service requests with mapped Service Request Type of Non-Case Service (Not I&amp;R/TA) if it does not require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (Not I&amp;R/TA) - Assigned / Requiring Supervisor Review</td><td>Can close assigned service requests with mapped Service Request Type of Non-Case Service (Not I&amp;R/TA) that require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (Not I&amp;R/TA) - Unassigned / Not Requiring Supervisor Review</td><td>Can close any service request with mapped Service Request Type of Non-Case Service (Not I&amp;R/TA) if it does not require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (Not I&amp;R/TA) - Unassigned / Requiring Supervisor Review</td><td>Can close any service request with mapped Service Request Type of Non-Case Service (Not I&amp;R/TA) that requires supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (Technical Assistance) - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned service requests with mapped Service Request Type of Non-Case Service (Technical Assistance) if it does not require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (Technical Assistance) - Assigned / Requiring Supervisor Review</td><td>Can close assigned service requests with mapped Service Request Type of Non-Case Service (Technical Assistance) that require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (Technical Assistance) - Unassigned / Not Requiring Supervisor Review</td><td>Can close any service request with mapped Service Request Type of Non-Case Service (Technical Assistance) if it does not require supervisor review.</td></tr>
+<tr><td>Close Service Requests: Non-Case Service (Technical Assistance) - Unassigned / Requiring Supervisor Review</td><td>Can close any service request with mapped Service Request Type of Non-Case Service (Technical Assistance) that requires supervisor review.</td></tr>
+<tr><td>Create Notes: Client Notes</td><td>Can create new notes in client notes.</td></tr>
+<tr><td>Create Notes: Service Request Notes</td><td>Can create new notes in service request notes.</td></tr>
+<tr><td>Create Open Date: Service Requests</td><td>Can set the open date when creating service requests.</td></tr>
+<tr><td>Create Records: Clients</td><td>Can create new clients records.</td></tr>
+<tr><td>Create Records: Service Requests</td><td>Can create new service requests records.</td></tr>
+<tr><td>Delete Notes: Client Notes (Any)</td><td>Can delete any client notes.</td></tr>
+<tr><td>Delete Notes: Client Notes (Own)</td><td>Can delete their own client notes.</td></tr>
+<tr><td>Delete Notes: Service Request Notes (Any)</td><td>Can delete any service request notes.</td></tr>
+<tr><td>Delete Notes: Service Request Notes (Own)</td><td>Can delete their own service request notes.</td></tr>
+<tr><td>Delete Records: Clients</td><td>Can permanently delete clients records.</td></tr>
+<tr><td>Delete Records: Service Requests</td><td>Can permanently delete service requests records.</td></tr>
+<tr><td>Edit Closed Records: Service Requests</td><td>Can edit service requests even after they are closed.</td></tr>
+<tr><td>Edit Funding Source: Service Requests (Any)</td><td>Can change the funding source for service requests (for any record).</td></tr>
+<tr><td>Edit Funding Source: Service Requests (Assigned)</td><td>Can change the funding source for service requests (for assigned records).</td></tr>
+<tr><td>Edit Notes: Client Notes (Any)</td><td>Can edit any client notes.</td></tr>
+<tr><td>Edit Notes: Client Notes (Own)</td><td>Can edit their own client notes.</td></tr>
+<tr><td>Edit Notes: Service Request Notes (Any)</td><td>Can edit any service request notes.</td></tr>
+<tr><td>Edit Notes: Service Request Notes (Own)</td><td>Can edit their own service request notes.</td></tr>
+<tr><td>Edit Open Date: Service Requests</td><td>Can change the open date for service requests.</td></tr>
+<tr><td>Edit Proposed Close Date: Service Requests</td><td>Can change the proposed close date for service requests.</td></tr>
+<tr><td>Edit Records: Clients</td><td>Can edit clients records.</td></tr>
+<tr><td>Edit Records: Service Requests (Any)</td><td>Can edit service requests records (any record).</td></tr>
+<tr><td>Edit Records: Service Requests (Assigned)</td><td>Can edit service requests records (records assigned to them).</td></tr>
+<tr><td>Edit Reference Date: Clients</td><td>Can change the reference date for clients.</td></tr>
+<tr><td>Edit Reference Date: Service Requests</td><td>Can change the reference date for service requests.</td></tr>
+<tr><td>Edit Security: Clients</td><td>Can change record-level security for clients.</td></tr>
+<tr><td>Edit Security: Service Requests</td><td>Can change record-level security for service requests.</td></tr>
+<tr><td>Edit Type: Service Requests (Any)</td><td>Can change the record type for service requests (for any record).</td></tr>
+<tr><td>Edit Type: Service Requests (Assigned)</td><td>Can change the record type for service requests (for assigned records).</td></tr>
+<tr><td>Move Records: Service Requests</td><td>Can move service requests between Client records.</td></tr>
+<tr><td>Reopen Records: Service Requests</td><td>Can reopen closed service requests.</td></tr>
+<tr><td>Review Service Request As a Supervisor</td><td>Can perform supervisor review actions for service requests.</td></tr>
+<tr><td>View Records: Client Records</td><td>Can view client records.</td></tr>
+<tr><td>View Records: Service Requests (Any)</td><td>Can view all service requests records.</td></tr>
+<tr><td>View Records: Service Requests (Assigned)</td><td>Can view assigned service requests records.</td></tr>
+</tbody></table>
+</div>
+<h2 id="projects"><a class="header" href="#projects">Projects</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Permission</th><th>What granting this permission does</th></tr></thead><tbody>
+<tr><td>Close Projects: Class Action Projects - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Class Action if it does not require supervisor review (i.e. has Project Type for which <em>Closure of Projects With This Type Requires Supervisor Review</em> is unchecked in Project Type Administration.)</td></tr>
+<tr><td>Close Projects: Class Action Projects - Assigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Class Action if it requires supervisor review (i.e. has Project Type for which <em>Closure of Projects With This Type Requires Supervisor Review</em> is unchecked in Project Type Administration.)</td></tr>
+<tr><td>Close Projects: Class Action Projects - Unassigned / Not Requiring Supervisor Review</td><td>Can close any projects with mapped Project Type of Class Action if it does not require supervisor review</td></tr>
+<tr><td>Close Projects: Class Action Projects - Unassigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Class Action if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Court Ordered Monitoring Projects - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Court Ordered Monitoring if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Court Ordered Monitoring Projects - Assigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Court Ordered Monitoring if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Court Ordered Monitoring Projects - Unassigned / Not Requiring Supervisor Review</td><td>Can close any projects with mapped Project Type of Court Ordered Monitoring if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Court Ordered Monitoring Projects - Unassigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Court Ordered Monitoring if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Educating Policy Maker Projects - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Educating Policy Maker if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Educating Policy Maker Projects - Assigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Educating Policy Maker if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Educating Policy Maker Projects - Unassigned / Not Requiring Supervisor Review</td><td>Can close any projects with mapped Project Type of Educating Policy Maker if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Educating Policy Maker Projects - Unassigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Educating Policy Maker if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Education Training Projects - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Education Training if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Education Training Projects - Assigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Education Training if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Education Training Projects - Unassigned / Not Requiring Supervisor Review</td><td>Can close any projects with mapped Project Type of Education Training if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Education Training Projects - Unassigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Education Training if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Group Advocacy Projects - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Group Advocacy if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Group Advocacy Projects - Assigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Group Advocacy if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Group Advocacy Projects - Unassigned / Not Requiring Supervisor Review</td><td>Can close any projects with mapped Project Type of Group Advocacy if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Group Advocacy Projects - Unassigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Group Advocacy if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Investigation Projects - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Investigation if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Investigation Projects - Assigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Investigation if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Investigation Projects - Unassigned / Not Requiring Supervisor Review</td><td>Can close any projects with mapped Project Type of Investigation if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Investigation Projects - Unassigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Investigation if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Local Projects - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Local if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Local Projects - Assigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Local if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Local Projects - Unassigned / Not Requiring Supervisor Review</td><td>Can close any projects with mapped Project Type of Local if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Local Projects - Unassigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Local if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Monitoring Projects - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Monitoring if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Monitoring Projects - Assigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Monitoring if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Monitoring Projects - Unassigned / Not Requiring Supervisor Review</td><td>Can close any projects with mapped Project Type of Monitoring if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Monitoring Projects - Unassigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Monitoring if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Other Systemic Projects - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Other Systemic if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Other Systemic Projects - Assigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Other Systemic if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Other Systemic Projects - Unassigned / Not Requiring Supervisor Review</td><td>Can close any projects with mapped Project Type of Other Systemic if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Other Systemic Projects - Unassigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Other Systemic if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Outreach Projects - Assigned / Not Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Outreach if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Outreach Projects - Assigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Outreach if it requires supervisor review.</td></tr>
+<tr><td>Close Projects: Outreach Projects - Unassigned / Not Requiring Supervisor Review</td><td>Can close any projects with mapped Project Type of Outreach if it does not require supervisor review.</td></tr>
+<tr><td>Close Projects: Outreach Projects - Unassigned / Requiring Supervisor Review</td><td>Can close assigned projects with mapped Project Type of Outreach if it requires supervisor review.</td></tr>
+<tr><td>Create Open Date: Projects</td><td>Can set the open date when creating for projects.</td></tr>
+<tr><td>Create Notes: Project Notes</td><td>Can create new notes in project notes.</td></tr>
+<tr><td>Create Records: Projects</td><td>Can create new projects records.</td></tr>
+<tr><td>Delete Records: Projects</td><td>Can permanently delete projects records.</td></tr>
+<tr><td>Delete Notes: Project Notes (Any)</td><td>Can delete any project notes.</td></tr>
+<tr><td>Delete Notes: Project Notes (Own)</td><td>Can delete their own project notes.</td></tr>
+<tr><td>Edit Closed Records: Projects</td><td>Can edit projects even after they are closed.</td></tr>
+<tr><td>Edit Funding Source: Projects (Any)</td><td>Can change the funding source for projects (for any record).</td></tr>
+<tr><td>Edit Funding Source: Projects (Assigned)</td><td>Can change the funding source for projects (for assigned records).</td></tr>
+<tr><td>Edit Notes: Project Notes (Any)</td><td>Can edit any project notes.</td></tr>
+<tr><td>Edit Notes: Project Notes (Own)</td><td>Can edit their own project notes.</td></tr>
+<tr><td>Edit Open Date: Projects</td><td>Can change the open date for projects.</td></tr>
+<tr><td>Edit Proposed Close Date: Projects</td><td>Can change the proposed close date for projects.</td></tr>
+<tr><td>Edit Records: Projects (Any)</td><td>Can edit projects records (any record).</td></tr>
+<tr><td>Edit Records: Projects (Assigned)</td><td>Can edit projects records (records assigned to them).</td></tr>
+<tr><td>Edit Reference Date: Projects</td><td>Can change the reference date for projects.</td></tr>
+<tr><td>Edit Security: Projects</td><td>Can change record-level security for projects.</td></tr>
+<tr><td>Edit Type: Projects (Any)</td><td>Can change the record type for projects (for any record).</td></tr>
+<tr><td>Edit Type: Projects (Assigned)</td><td>Can change the record type for projects (for assigned records).</td></tr>
+<tr><td>Review Projects As a Supervisor</td><td>Can perform supervisor review actions for projects.</td></tr>
+<tr><td>Reopen Records: Projects</td><td>Can reopen closed projects.</td></tr>
+<tr><td>View Records: Projects (Any)</td><td>Can view all projects records.</td></tr>
+<tr><td>View Records: Projects (Assigned)</td><td>Can view assigned projects records.</td></tr>
+</tbody></table>
+</div>
+<h2 id="fund-splits"><a class="header" href="#fund-splits">Fund Splits</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Permission</th><th>What granting this permission does</th></tr></thead><tbody>
+<tr><td>Create Alternate Fund Splits</td><td>Can create alternate fund split configurations.</td></tr>
+<tr><td>Edit Fund Splits</td><td>Can edit existing fund split configurations.</td></tr>
+<tr><td>Use Alternate Fund Splits</td><td>Can apply alternate fund splits when recording work/funding.</td></tr>
+<tr><td>Replace Master Splits</td><td>Can replace the master (default) fund split definitions.</td></tr>
+</tbody></table>
+</div>
+<h2 id="administration"><a class="header" href="#administration">Administration</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Permission</th><th>What granting this permission does</th></tr></thead><tbody>
+<tr><td>Edit: Collaborations</td><td>Can add or edit collaboration records/settings.</td></tr>
+<tr><td>Edit: Facilities</td><td>Can add or edit facility records/settings.</td></tr>
+<tr><td>Edit: Teams to Employees</td><td>Can assign employees to teams (and update those assignments).</td></tr>
+<tr><td>Override Closure Lockout Date</td><td>Can override the lockout date that prevents editing closed items.</td></tr>
+<tr><td>Access Control: Administration</td><td>Allows access to <strong>Administration</strong>.</td></tr>
+<tr><td>Access Control: Publication Administration</td><td>Allows access to <strong>Publication Administration</strong>.</td></tr>
+</tbody></table>
+</div>
+<h2 id="report-generator"><a class="header" href="#report-generator">Report Generator</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Permission</th><th>What granting this permission does</th></tr></thead><tbody>
+<tr><td>Access Control: Report Generator</td><td>Allows access to <strong>Report Generator</strong>.</td></tr>
+<tr><td>Delete Report Generator Reports: Shared</td><td>Can delete reports that have been saved as shared.</td></tr>
+</tbody></table>
+</div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../appendix/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../appendix/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

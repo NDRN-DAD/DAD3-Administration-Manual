@@ -1,0 +1,361 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Timekeeper Options - DAD 3.0 Administration Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../custom.css">
+        <link rel="stylesheet" href="../.././mdbook-admonish.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">DAD 3.0 Administration Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><a href="../../index.html">Home</a> / <a href="../index.html">Configuration Reference</a> / <a href="index.html">Section: Time</a> / Timekeeper Options</p>
+<h1 id="timekeeper-options"><a class="header" href="#timekeeper-options">Timekeeper Options</a></h1>
+<p><strong>Page Type:</strong> Settings Form (URL: <a href="https://dad3.ndrn.org/admin/admintimekeeperedit">https://dad3.ndrn.org/admin/admintimekeeperedit</a>) <!--style: Subtitle --></p>
+<p>These settings are used to configure timekeeping functions and customize the the messages and labels on timesheets. All text settings are optional.</p>
+<h2 id="timekeeper-options-form"><a class="header" href="#timekeeper-options-form">Timekeeper Options Form</a></h2>
+<p><img src="../../images/Time-Timekeeper%20Options%201.png" alt="Timekeeper Options admin page screenshot - 1 of 3" />
+<img src="../../images/Time-Timekeeper%20Options%202.png" alt="Timekeeper Options admin page screenshot - 2 of 3" />
+<img src="../../images/Time-Timekeeper%20Options%203.png" alt="Timekeeper Options admin page screenshot - 3 of 3" /></p>
+<ul>
+<li>
+<p><strong>Timekeeper Time Units</strong> (Dropdown):</p>
+<ul>
+<li>Minutes</li>
+<li>Quarters of an hour</li>
+<li>Tenths of an hour</li>
+</ul>
+</li>
+<li>
+<p><strong>Time Sheet Exempt Label</strong> (Long Text): Optional label to designate Exempt employee timesheet (replaces default "Exempt"). <em>See #2 in Sample Timesheet</em>.</p>
+</li>
+<li>
+<p><strong>Time Sheet Non-Exempt Label</strong> (Long Text): Optional label to designate Non-Exempt employee timesheet (replaces default "Non-Exempt"). <em>See #2 in Sample Timesheet</em>.</p>
+</li>
+<li>
+<p><strong>Time Sheet Message Exempt</strong> (Long Text - optional): Optional custom message that displays above Notes section Exempt employee timesheets. <em>See #6 in Sample Timesheet</em>.</p>
+</li>
+<li>
+<p><strong>Time Sheet Exempt Validation Message</strong> (Long Text - optional): Optional Validation Message text to display to Exempt Employees on Timesheet submission form.</p>
+</li>
+<li>
+<p><strong>Time Sheet Exempt Certification Statement</strong> (Long Text - optional): Optional Certification Message text to display for Exempt Employees on Timesheet submission form and PDF Timesheet. <em>See #3 in Sample Timesheet</em>.</p>
+<p><em>Example:</em> "I certify that these hours are a true and accurate record of all time worked during the pay period."</p>
+</li>
+<li>
+<p><strong>Time Sheet Message Non-Exempt</strong> (Long Text - optional): Optional custom message that displays above Notes section Non-Exempt employee timesheets. <em>See #6 in Sample Timesheet</em>.</p>
+</li>
+<li>
+<p><strong>Time Sheet Non-Exempt Validation Message</strong> (Long Text - optional): Optional Validation Message text to display to Non-Exempt Employees on Timesheet submission form.</p>
+</li>
+<li>
+<p><strong>Time Sheet Non-Exempt Certification Statement</strong> (Long Text - optional): Optional Certification Message text to display for Non-Exempt Employees on Timesheet submission form and PDF Timesheet. <em>See #3 in Sample Timesheet</em>.</p>
+<p><em>Example:</em> "I certify that these hours are a true and accurate record of all time worked during the pay period."</p>
+</li>
+<li>
+<p><strong>Time Sheet Supervisor Validation Message</strong> (Long Text - optional): Optional Validation Message text to display to Supervisor on Timesheet Review form.</p>
+</li>
+<li>
+<p><strong>Time Sheet Supervisor Certification Statement</strong> (Long Text - optional): Optional Certification Message text to display to Supervisor for Non-Exempt Employees on Timesheet review form and PDF Timesheet. <em>See #4 in Sample Timesheet</em>.</p>
+</li>
+<li>
+<p><strong>Time Sheet Accounting Validation Message</strong> (Long Text - optional): Optional Validation Message text to display to Accountant on Timesheet Processing form.</p>
+</li>
+<li>
+<p><strong>Time Sheet Accounting Certification Statement</strong> (Long Text - optional): Optional Certification Message text to display to Accountant for Non-Exempt Employees on Timesheet Processing form and PDF Timesheet. <em>See #5 in Sample Timesheet</em>.</p>
+</li>
+<li>
+<p><strong>Time Sheet Lock Out Period</strong> (Whole Number): Time window (in days) before which Time records can't be added, edited, or deleted. Example: If Time Sheet Lock Out Period is set to 30, users will be unable to add/modify/delete time entries with a Time Entry Date older than 30 days.</p>
+</li>
+<li>
+<p><strong>Allow SR Time Entries Outside of Open and Close Dates</strong> (Checkbox): If checked, users will be able to enter time for Service Requests with a date outside the Open and Close dates (i.e. when the SR was not open). If unchecked, users will get an error.</p>
+</li>
+<li>
+<p><strong>Allow Project Time Entries Outside of Open and Close Dates</strong> (Checkbox): If checked, users will be able to enter time for Projects with a date outside the Open and Close dates (i.e. when the Project was not open). If unchecked, users will get an error.</p>
+</li>
+<li>
+<p><strong>Include Employee Time Report On Archived (PDF) Timesheet</strong> (Checkbox): If checked, the final Archived PDF timesheet will contain the Time Report (list of individual time entries) following the timesheet.</p>
+</li>
+<li>
+<p><strong>Non-Exempt Work Day Hours</strong> (Decimal Number): This number defines a full time work day and is used in conjunction with the FTE (full time equivalent) setting for the employee (in their User record) to calculate the total numnber of work hours in the pay period. For agencies with a 40 hour workweek, this should be set to 8.</p>
+</li>
+<li>
+<p><strong>Timekeeper Start Of Week</strong> (Dropdown): Select the first day of the week for timesheet display. Typically set to <em>Sunday</em> or <em>Monday</em>.</p>
+</li>
+<li>
+<p><strong>Exempt Time Sheet Period Type</strong> (Dropdown): This setting controls the Start Date and End Date that an Exempt user will see when creating a new timesheet.</p>
+<ul>
+<li>Weekly</li>
+<li>Bi-Weekly</li>
+<li>Semi-Monthly</li>
+<li>Monthly</li>
+<li>Manual</li>
+</ul>
+</li>
+<li>
+<p><strong>Exempt Pay Period 1 Start Day</strong> (Whole Number): Displays for Semi-Monthly Period Type only; Calender start date for the first pay period in a month. This setting controls the Start Date that an Exempt user will see when creating a new Semi-monthly timesheet. This is typically set to 1.</p>
+</li>
+<li>
+<p><strong>Exempt Pay Period 2 Start Day</strong> (Whole Number): Displays for Semi-Monthly Period Type only; Calender start date for the second pay period in a month. This setting controls the Start Date that an Exempt user will see when creating a new Semi-monthly timesheet. This is commonly set to 15 or 16, to align with internal accounting requirements.</p>
+</li>
+<li>
+<p><strong>Non-Exempt Time Sheet Period Type</strong>: This setting controls the Start Date and End Date that a Non-Exempt user will see when creating a new timesheet.</p>
+<ul>
+<li>Weekly</li>
+<li>Bi-Weekly</li>
+<li>Semi-Monthly</li>
+<li>Monthly</li>
+<li>Manual</li>
+</ul>
+</li>
+<li>
+<p><strong>Non-Exempt Pay Period 1 Start Day</strong> (Whole Number): Displays for Semi-Monthly Period Type only; Calender start date for the first pay period in a month. This setting controls the Start Date that an Exempt user will see when creating a new Semi-monthly timesheet. This is typically set to 1.</p>
+</li>
+<li>
+<p><strong>Non-Exempt Pay Period 2 Start Day</strong> (Whole Number): Displays for Semi-Monthly Period Type only; Calender start date for the second pay period in a month. This setting controls the Start Date that an Exempt user will see when creating a new Semi-monthly timesheet. This is commonly set to 15 or 16, to align with internal accounting requirements.</p>
+</li>
+<li>
+<p><strong>Timekeeper Advocacy Group Description</strong> (Short Text - optional): Optional label for timesheet (replaces default Advocacy Group name). See #1 in Sample Timesheet.</p>
+</li>
+</ul>
+<h2 id="sample-timesheet"><a class="header" href="#sample-timesheet">Sample Timesheet</a></h2>
+<p>This sample timesheet shows how the text settings above appear in an individual timesheet.</p>
+<p><img src="../../images/Time-Timesheet-Sample.png" alt="Sample Timesheet with messages highlighted and labeled one through six" /></p>
+<p><a href="leave.html">← Previous: Leave</a> | <a href="holidays.html">Next: Holidays →</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../configuration-reference/section-time/leave.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../configuration-reference/section-time/holidays.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../configuration-reference/section-time/leave.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../configuration-reference/section-time/holidays.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

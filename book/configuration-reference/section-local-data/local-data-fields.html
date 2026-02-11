@@ -1,0 +1,335 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Local Data Fields - DAD 3.0 Administration Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../custom.css">
+        <link rel="stylesheet" href="../.././mdbook-admonish.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">DAD 3.0 Administration Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><a href="../../index.html">Home</a> / <a href="../index.html">Configuration Reference</a> / <a href="index.html">Section: Local Data</a> / Local Data Fields</p>
+<h1 id="local-data-fields"><a class="header" href="#local-data-fields">Local Data Fields</a></h1>
+<p><strong>Page Type:</strong> Table with Collapsible Filters section (URL: <a href="https://dad3.ndrn.org/admin/admindisplayuserdefinedfields">https://dad3.ndrn.org/admin/admindisplayuserdefinedfields</a>) <!--style: Subtitle --></p>
+<p><strong>Associated Record Types:</strong> <a href="../section-funds/funding-sources.html">Funding Sources</a>, <a href="../section-service-requests/service-request-types.html">Service Request Types</a> (Service Requests), <a href="../section-service-requests/project-types.html">Project Types</a>, <a href="../section-funds/problems-subproblems.html">Problem/Subproblem</a></p>
+<p><img src="../../images/Local%20Data-Local%20Data%20Fields.png" alt="Local Data Fields admin page screenshot" /></p>
+<h2 id="local-data-fields-form"><a class="header" href="#local-data-fields-form">Local Data Fields Form</a></h2>
+<h3 id="basic-info-tab"><a class="header" href="#basic-info-tab">Basic Info Tab</a></h3>
+<p><img src="../../images/Local%20Data-Local%20Data%20Fields-Form-Basic%20Info.png" alt="Screenshot of Local Data Local Data Fields Form Basic Info tab" /></p>
+<ul>
+<li>
+<p><strong>Name</strong> (Short Text - required)
+Name of the Local Data Field (as seen in the Report Generator)</p>
+</li>
+<li>
+<p><strong>Label Text</strong> (Short Text - required)
+Name of the Local Data Field (as seen in records / by end users)</p>
+</li>
+<li>
+<p><strong>Help Text</strong> (Long Text - optional)</p>
+<p>Agencies can add Help text to this field that displays as a tip when hovering over or navigating to the Local Data Field.</p>
+</li>
+<li>
+<p><strong>Field Type</strong> (Dropdown selection)
+Checkbox List
+Date Dropdown
+Dropdown List
+Numeric Box
+Text Box - Multi-Line
+Text Box - Single-Line
+Yes/No Radio Buttons</p>
+</li>
+<li>
+<p><strong>Display Type</strong> (Dropdown selection)</p>
+<ul>
+<li><strong>Opening</strong>: Field displays at all times</li>
+<li><em>Closing</em>*: Field displays only on <strong>Prepare for Closing</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Client Association</strong> (Dropdown selection)</p>
+<ul>
+<li><strong>On Creation</strong>: Field displays on the New Client Creation form; optional to answer</li>
+<li><strong>On Creation - Required at SR Closing</strong>: Field displays on the New Client Creation form; Service Requests for the Client cannot be closed until it is completed (similar to reportable Client fields like Gender, Race and Ethnicity)</li>
+<li><strong>On Edit</strong>: Field does <em>not</em> display on New Client Creation form, but appears on edit.</li>
+<li><strong>On Edit - Required at SR Closing</strong>: Field does <em>not</em> display on New Client Creation form, but appears on edit. Service Requests for the Client cannot be closed until it is completed.</li>
+</ul>
+</li>
+<li>
+<p><strong>SR Association</strong> (Dropdown selection)</p>
+<ul>
+<li><strong>Required</strong>: Field is required to close the service request</li>
+<li><strong>Optional - On Creation</strong>: Field is optional and displays on the New Service Request form</li>
+<li><strong>Optional - On Edit</strong>: Field is optional and does <em>not</em> display on New Service Request form, but appears on edit.</li>
+<li><strong>Optional with Warnings - On Creation</strong>: Field is optional and displays on the New Service Request form; Validation Warning displays on record if unanswered.</li>
+<li><strong>Optional with Warnings - On Edit</strong>: Field is optional and does <em>not</em> display on New Service Request form, but appears on edit; Validation Warning displays on record if unanswered.</li>
+</ul>
+</li>
+<li>
+<p><strong>Project Association</strong> (Dropdown selection)</p>
+<ul>
+<li><strong>Required</strong>: Field is required to close the project</li>
+<li><strong>Optional - On Creation</strong>: Field is optional and displays on the New Project form</li>
+<li><strong>Optional - On Edit</strong>: Field is optional and does <em>not</em> display on New Project  form, but appears on edit.</li>
+<li><strong>Optional with Warnings - On Creation</strong>: Field is optional and displays on the New Project form; Validation Warning displays on record if unanswered.</li>
+<li><strong>Optional with Warnings - On Edit</strong>: Field is optional and does <em>not</em> display on New Project form, but appears on edit; Validation Warning displays on record if unanswered.</li>
+</ul>
+</li>
+<li>
+<p><strong>Active Date</strong> and <strong>Inactive Date</strong>: Field will display in records with a Reference Date greater than or equal to the Active Date, and less than the Inactive Date (if entered).</p>
+</li>
+</ul>
+<h3 id="options-tab"><a class="header" href="#options-tab">Options Tab</a></h3>
+<p>This tab appears if Field Type is Checkbox list or Dropdown list. Each option appears based on Active and Inactive dates. Options are <strong>Requires Further Explanation</strong> and <strong>Is the Default Option</strong>.</p>
+<p><img src="../../images/Local%20Data-Local%20Data%20Fields-Form-Options.png" alt="Screenshot of Local Data Local Data Fields Form Options tab" /></p>
+<h3 id="funds-tab"><a class="header" href="#funds-tab">Funds Tab</a></h3>
+<p>Select the Funding Sources for which this field should display. To display for all funding sources, use <strong>Not Funding Specific</strong> option.</p>
+<p><img src="../../images/Local%20Data-Local%20Data%20Fields-Form-Funds.png" alt="Screenshot of Local Data Local Data Fields Form Funds tab" /></p>
+<h3 id="service-request-types-tab"><a class="header" href="#service-request-types-tab">Service Request Types Tab</a></h3>
+<p>If associated with Service Requests, select the SR Types for which this field should display. To display for all SR Types, use <strong>Not Service Request Type Specific</strong> option.</p>
+<p><img src="../../images/Local%20Data-Local%20Data%20Fields-Form-Service%20Request%20Types.png" alt="Screenshot of Local Data Local Data Fields Form Service Request Types tab" /></p>
+<h3 id="project-types-tab"><a class="header" href="#project-types-tab">Project Types Tab</a></h3>
+<p>If associated with Projects, select the Project Types for which this field should display. To display for all Project Types, use <strong>Not Project Type Specific</strong> option.</p>
+<p><img src="../../images/Local%20Data-Local%20Data%20Fields-Form-Project%20Types.png" alt="Screenshot of Local Data Local Data Fields Form Project Types tab" /></p>
+<h3 id="problems--subproblems-tab"><a class="header" href="#problems--subproblems-tab">Problems / Subproblems Tab</a></h3>
+<p>If desired, select Problem/Subproblem combinations: the field will only display if Problem and Subproblem for the record match. To display for all Problem/Subproblem selections, use <strong>Not Problem / Subproblem Specific</strong> option.</p>
+<p><img src="../../images/Local%20Data-Local%20Data%20Fields-Form-Problems%20&amp;%20Subproblems.png" alt="Screenshot of Local Data Local Data Fields Form Problems &amp; Subproblems tab" /></p>
+<p><a href="index.html">← Previous: Section: Local Data</a> | <a href="out-of-date-client-local-data-fields.html">Next: Out of Date Client Local Data Fields →</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../configuration-reference/section-local-data/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../configuration-reference/section-local-data/out-of-date-client-local-data-fields.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../configuration-reference/section-local-data/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../configuration-reference/section-local-data/out-of-date-client-local-data-fields.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

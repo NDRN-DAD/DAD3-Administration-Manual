@@ -1,0 +1,28 @@
+[book]
+title = "DAD 3.0 Administration Manual"
+authors = ["Elise Cassidente"]
+language = "en"
+multilingual = false
+src = "src"
+
+[preprocessor.admonish]
+command = "mdbook-admonish"
+assets_version = "3.1.0" # do not edit: managed by `mdbook-admonish install`
+
+[output.html]
+additional-css = ["custom.css", "./mdbook-admonish.css"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

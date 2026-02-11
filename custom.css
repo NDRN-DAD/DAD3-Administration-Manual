@@ -1,0 +1,27 @@
+h1 {
+    font-size: 2.5em;
+    margin-top:1em;
+    margin-bottom:1em;
+}
+
+h2 {
+    font-size: 2em;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    padding:0;
+}
+
+h3 {
+    font-size: 1.5em;
+    margin-top:0.25em;
+    margin-bottom:0.25em;
+    margin-left:1em;
+}
+
+p, img {
+    margin-left:1.5em;
+}
+
+.indent-block {
+    margin-left: 2em; /* Indents the whole block */
+}

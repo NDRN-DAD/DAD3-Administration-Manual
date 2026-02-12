@@ -77,10 +77,10 @@ In DAD 3.0 users can reset their own 2FA under [Manage your Acccount settings](h
 ![Screenshot of User Maintenance Form Basic Info tab](../../images/Users-User%20Maintenance-Form-Basic%20Info.png)
 
 - **First Name** (Short Text - required)
-    Enter the user's first name as it should display in DAD records. If a user has a different name for timesheet/payroll purposes, you can spacify this in Tab: 2 Timekeeping, **Time Sheet First Name**.
+    Enter the user's first name as it should display in DAD records. If a user has a different name for timesheet/payroll purposes, you can specify this in Tab: 2 Timekeeping, **Time Sheet First Name**.
 
 - **Last Name** (Short Text - required)
-    Enter the user's last name as it should display in DAD records. If a user has a different name for timesheet/payroll purposes, you can spacify this in Tab: 2 Timekeeping, **Time Sheet Last Name**.
+    Enter the user's last name as it should display in DAD records. If a user has a different name for timesheet/payroll purposes, you can specify this in Tab: 2 Timekeeping, **Time Sheet Last Name**.
 
 - **User Number** (Short Text - optional/agency defined)
 
@@ -106,7 +106,7 @@ In DAD 3.0 users can reset their own 2FA under [Manage your Acccount settings](h
 
 - **Password** 
 
-     In DAD 2, passwords were restricted to 8–14 characters and required at least 1 uppercase, 1 lowercase, 1 number, and 1 special character. In DAD 3, password rules may differ based on agency policy. (Short Text - required)
+     In DAD 2, passwords were restricted to 8–14 characters and required at least 1 uppercase, 1 lowercase, 1 number, and 1 special character. In DAD 3, password length can be longer than 14 characters. (Short Text - required)
 
 - **Generate Random Password button**
 
@@ -163,15 +163,19 @@ In DAD 3.0 users can reset their own 2FA under [Manage your Acccount settings](h
 
 - **Time Sheet Supervisor** (Dropdown selection)
 
+          Submitted timesheets for this user will appear on Time Sheet Supervisor's approval queue.
+
 - **Time Sheet Accountant** (Dropdown selection)
 
+          Approved timesheets for this user will appear on Time Sheet Accountant's processing queue.
+          
 - **Time Sheet First Name** (Short Text - optional)
 
-    If a user uses a different name for timesheet/payroll purposes, you can spacify it here. Otherwise, leave this field blank.
+    If a user uses a different name for timesheet/payroll purposes, you can specify it here. Otherwise, leave this field blank.
 
 - **Time Sheet Last Name** (Short Text - optional)
 
-    If a user uses a different name for timesheet/payroll purposes, you can spacify it here. Otherwise, leave this field blank.
+    If a user uses a different name for timesheet/payroll purposes, you can specify it here. Otherwise, leave this field blank.
 
 ### User Form Tab 3: Disabilities
 

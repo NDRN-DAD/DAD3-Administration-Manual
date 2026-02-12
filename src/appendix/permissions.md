@@ -10,6 +10,7 @@ The tables below group permissions by record type or function and explain what g
 ```admonish important
 **Permissions are additive.** Users receive every permission included in each role they are assigned. Roles only grant privileges; they do not override or take away permissions granted by other roles.
 ```
+
 ## Permissions Categories
 
 - [All Users](#all-users)

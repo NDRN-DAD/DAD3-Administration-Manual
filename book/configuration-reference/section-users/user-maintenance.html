@@ -248,11 +248,11 @@
 <ul>
 <li>
 <p><strong>First Name</strong> (Short Text - required)
-Enter the user's first name as it should display in DAD records. If a user has a different name for timesheet/payroll purposes, you can spacify this in Tab: 2 Timekeeping, <strong>Time Sheet First Name</strong>.</p>
+Enter the user's first name as it should display in DAD records. If a user has a different name for timesheet/payroll purposes, you can specify this in Tab: 2 Timekeeping, <strong>Time Sheet First Name</strong>.</p>
 </li>
 <li>
 <p><strong>Last Name</strong> (Short Text - required)
-Enter the user's last name as it should display in DAD records. If a user has a different name for timesheet/payroll purposes, you can spacify this in Tab: 2 Timekeeping, <strong>Time Sheet Last Name</strong>.</p>
+Enter the user's last name as it should display in DAD records. If a user has a different name for timesheet/payroll purposes, you can specify this in Tab: 2 Timekeeping, <strong>Time Sheet Last Name</strong>.</p>
 </li>
 <li>
 <p><strong>User Number</strong> (Short Text - optional/agency defined)</p>
@@ -279,7 +279,7 @@ Enter the user's last name as it should display in DAD records. If a user has a 
 </li>
 <li>
 <p><strong>Password</strong></p>
-<p>In DAD 2, passwords were restricted to 8–14 characters and required at least 1 uppercase, 1 lowercase, 1 number, and 1 special character. In DAD 3, password rules may differ based on agency policy. (Short Text - required)</p>
+<p>In DAD 2, passwords were restricted to 8–14 characters and required at least 1 uppercase, 1 lowercase, 1 number, and 1 special character. In DAD 3, password length can be longer than 14 characters. (Short Text - required)</p>
 </li>
 <li>
 <p><strong>Generate Random Password button</strong></p>
@@ -344,17 +344,21 @@ This field is used primarily by agencies who do timekeeping calculations that re
 </li>
 <li>
 <p><strong>Time Sheet Supervisor</strong> (Dropdown selection)</p>
+<pre><code>    Submitted timesheets for this user will appear on Time Sheet Supervisor's approval queue.
+</code></pre>
 </li>
 <li>
 <p><strong>Time Sheet Accountant</strong> (Dropdown selection)</p>
+<pre><code>    Approved timesheets for this user will appear on Time Sheet Accountant's processing queue.
+</code></pre>
 </li>
 <li>
 <p><strong>Time Sheet First Name</strong> (Short Text - optional)</p>
-<p>If a user uses a different name for timesheet/payroll purposes, you can spacify it here. Otherwise, leave this field blank.</p>
+<p>If a user uses a different name for timesheet/payroll purposes, you can specify it here. Otherwise, leave this field blank.</p>
 </li>
 <li>
 <p><strong>Time Sheet Last Name</strong> (Short Text - optional)</p>
-<p>If a user uses a different name for timesheet/payroll purposes, you can spacify it here. Otherwise, leave this field blank.</p>
+<p>If a user uses a different name for timesheet/payroll purposes, you can specify it here. Otherwise, leave this field blank.</p>
 </li>
 </ul>
 <h3 id="user-form-tab-3-disabilities"><a class="header" href="#user-form-tab-3-disabilities">User Form Tab 3: Disabilities</a></h3>
@@ -400,22 +404,6 @@ This field is used primarily by agencies who do timekeeping calculations that re
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

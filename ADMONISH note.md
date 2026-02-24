@@ -8,18 +8,17 @@ DAD now uses two-factor authentication. See relevant section for rationale, tuto
 ```
 
 
-tip
-important
-
-info
-
-note
-
-summary
-
-warning
-caution
-
-danger
-
-example
+| Admonition | Synonyms / Aliases |
+|------------|-------------------|
+| `note` | |
+| `abstract`, `summary`, `tldr` | |
+| `info`, `todo` | |
+| `tip`, `hint`, `important` | |
+| `success`, `check`, `done` | |
+| `question`, `help`, `faq` | |
+| `warning`, `caution`, `attention` | |
+| `failure`, `fail`, `missing` | |
+| `danger`, `error` | |
+| `bug` | |
+| `example` | |
+| `quote`, `cite` | |

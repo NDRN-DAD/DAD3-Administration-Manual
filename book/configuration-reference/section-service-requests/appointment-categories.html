@@ -10,6 +10,49 @@
         <!-- HEAD.HBS TEST: if you can read this in page source, overrides are working -->
         <meta name="robots" content="noindex, nofollow, noarchive">
         <meta name="googlebot" content="noindex, nofollow, noarchive">
+        
+        <script>
+        (function () {
+          const PASSWORD = "NDRN022426";
+        
+          if (sessionStorage.getItem("mdbook-auth") === "ok") return;
+        
+          document.addEventListener("DOMContentLoaded", function () {
+            const overlay = document.createElement("div");
+            overlay.style = `
+              position: fixed;
+              inset: 0;
+              background: #111;
+              color: white;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              z-index: 99999;
+              font-family: sans-serif;
+            `;
+        
+            overlay.innerHTML = `
+              <div>
+                <h2 id="password-required"><a class="header" href="#password-required">Password Required</a></h2>
+                <input type="password" id="pw" style="padding:8px;">
+                <button id="go" style="padding:8px;">Enter</button>
+              </div>
+            `;
+        
+            document.body.appendChild(overlay);
+        
+            document.getElementById("go").onclick = function () {
+              const val = document.getElementById("pw").value;
+              if (val === PASSWORD) {
+                sessionStorage.setItem("mdbook-auth", "ok");
+                overlay.remove();
+              } else {
+                alert("Incorrect password");
+              }
+            };
+          });
+        })();
+        </script>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -217,22 +260,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
